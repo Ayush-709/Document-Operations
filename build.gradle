@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.0'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'org.demo'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.apache.pdfbox:pdfbox:3.0.3'
+    implementation 'org.apache.commons:commons-lang3:3.15.0'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // XDocReport for DOCX to PDF conversion
+    implementation 'fr.opensagres.xdocreport:xdocreport:2.0.6'
+
+    // Apache POI for handling DOCX files
+    implementation 'org.apache.poi:poi-ooxml:5.3.0'
+
+    // ImageIO library for handling WebP format
+    implementation 'com.twelvemonkeys.imageio:imageio-webp:3.10.1'
+    implementation 'org.apache.pdfbox:fontbox:3.0.3' // Font support
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
